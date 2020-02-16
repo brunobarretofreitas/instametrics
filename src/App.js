@@ -1,25 +1,45 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
 
-function App() {
+import GlobalStyle from './styles/global';
+
+import Smartphone, {
+  SmartphoneScreen, SmartphoneHeader,
+  SmartphoneFooter, SmartphoneAudio,
+  SmartphoneButton
+} from 'components/Smartphone';
+
+import SplashScreen from 'components/Smartphone/SplashScreen';
+
+import Container from 'components/Container';
+import HomeScreen from 'pages/Home';
+
+export const App = () => {
+  const [showSplashScreen, setShowSplashScreen] = useState(true);
+
+  setTimeout(
+    () => setShowSplashScreen(false),
+    2000
+  );
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+   <Container center>
+    <Smartphone>
+      <SmartphoneHeader>
+        <SmartphoneAudio />
+      </SmartphoneHeader>
+      <SmartphoneScreen>
+        {
+          showSplashScreen ?
+            <SplashScreen /> :
+            <HomeScreen />
+        }
+      </SmartphoneScreen>
+      <SmartphoneFooter>
+        <SmartphoneButton />
+      </SmartphoneFooter>
+    </Smartphone>
+    <GlobalStyle />
+   </Container>
   );
 }
 
